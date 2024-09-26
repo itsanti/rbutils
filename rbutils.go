@@ -1,5 +1,10 @@
 package rbutils
 
+import (
+	"fmt"
+	"time"
+)
+
 func InSlice(a []string, x string) bool {
 	for _, n := range a {
 		if x == n {
@@ -16,4 +21,12 @@ func InSliceInt(a []int, x int) bool {
 		}
 	}
 	return false
+}
+
+func LogTime() func() { // use: defer LogTime()()
+	start := time.Now()
+	return func() {
+		duration := time.Since(start)
+		fmt.Printf("\nProgram ran for: %v\n", duration)
+	}
 }
